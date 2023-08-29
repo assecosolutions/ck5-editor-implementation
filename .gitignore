@@ -19,8 +19,8 @@ tmp
 # Build
 public/css/main.css
 
-# Dependencies
-/node_modules
+# Dependencies (includes custom builds)
+node_modules/
 
 # Ignore built ts files
 dist/**/*
