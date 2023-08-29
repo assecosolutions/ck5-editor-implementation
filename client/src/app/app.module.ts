@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { ClassicEditorModule } from './classic-editor/classic-editor.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomEditorModule } from './custom-editor/custom-editor.component';
 
@@ -12,7 +11,6 @@ import { CustomEditorModule } from './custom-editor/custom-editor.component';
   ],
   imports: [
     BrowserModule,
-    ClassicEditorModule,
     NgbModule,
     CustomEditorModule,
   ],
