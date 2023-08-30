@@ -11,6 +11,13 @@ import * as customBuild from '../../ck-custom-build/build/ckeditor';
 export class CustomEditorComponent {
   public htmlData:string = "<p>Hello, world!</p>";
   public Editor = customBuild as any;
+
+  public config = {
+		simpleUpload: {
+			uploadUrl: 'http://localhost:5278/upload',
+      propertyName: 'file',
+		}
+  }
 }
 
 @NgModule({
