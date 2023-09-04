@@ -9,7 +9,7 @@ import Editor from '../../../ck-custom-build/build/ckeditor';
   styleUrls: ['./custom-editor.component.scss']
 })
 export class CustomEditorComponent {
-  public htmlData:string = "<p>Hello, world!</p>";
+  public htmlData = "<p>Hello, world!</p>";
   public Editor = Editor;
 
   public config = {

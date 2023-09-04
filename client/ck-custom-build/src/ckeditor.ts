@@ -6,7 +6,7 @@
 import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
 
 import { Autoformat } from '@ckeditor/ckeditor5-autoformat';
-import { Bold, Italic } from '@ckeditor/ckeditor5-basic-styles';
+import { Bold, Italic, Underline } from '@ckeditor/ckeditor5-basic-styles';
 import { BlockQuote } from '@ckeditor/ckeditor5-block-quote';
 import { CloudServices } from '@ckeditor/ckeditor5-cloud-services';
 import { Essentials } from '@ckeditor/ckeditor5-essentials';
@@ -28,6 +28,8 @@ import { PasteFromOffice } from '@ckeditor/ckeditor5-paste-from-office';
 import { Table, TableToolbar } from '@ckeditor/ckeditor5-table';
 import { TextTransformation } from '@ckeditor/ckeditor5-typing';
 import { SimpleUploadAdapter } from '@ckeditor/ckeditor5-upload';
+import { Highlight } from '@ckeditor/ckeditor5-highlight';
+import { Alignment } from '@ckeditor/ckeditor5-alignment';
 
 // You can read more about extending the build with additional plugins in the "Installing plugins" guide.
 // See https://ckeditor.com/docs/ckeditor5/latest/installation/plugins/installing-plugins.html for details.
@@ -56,7 +58,10 @@ class Editor extends ClassicEditor {
 		SimpleUploadAdapter,
 		Table,
 		TableToolbar,
-		TextTransformation
+		TextTransformation,
+		Highlight,
+		Underline,
+		Alignment
 	];
 
 	public static override defaultConfig = {
@@ -69,7 +74,9 @@ class Editor extends ClassicEditor {
 				'|',
 				'bold',
 				'italic',
+				'underline',
 				'fontSize',
+				'highlight',
 				'|',
 				'link',
 				'imageUpload',
@@ -79,6 +86,7 @@ class Editor extends ClassicEditor {
 				'|',
 				'bulletedList',
 				'numberedList',
+				'alignment',
 				'outdent',
 				'indent'
 			]
