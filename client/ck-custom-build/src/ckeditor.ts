@@ -30,9 +30,37 @@ import { TextTransformation } from '@ckeditor/ckeditor5-typing';
 import { SimpleUploadAdapter } from '@ckeditor/ckeditor5-upload';
 import { Highlight } from '@ckeditor/ckeditor5-highlight';
 import { Alignment } from '@ckeditor/ckeditor5-alignment';
+import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 
-// You can read more about extending the build with additional plugins in the "Installing plugins" guide.
-// See https://ckeditor.com/docs/ckeditor5/latest/installation/plugins/installing-plugins.html for details.
+// Timestamp plugin
+class Timestamp extends Plugin {
+	public init() {
+		const editor = this.editor;
+        editor.ui.componentFactory.add( 'timestamp', () => {
+            const button = new ButtonView();
+
+            button.set( {
+                label: 'Timestamp',
+                withText: true
+            } );
+
+			// Execute a callback function when the button is clicked.
+            button.on( 'execute', () => {
+                const now = new Date();
+
+                // Change the model using the model writer.
+                editor.model.change( writer => {
+
+                    // Insert the text at the user's current position.
+                    editor.model.insertContent( writer.createText( now.toString() ) );
+                } );
+            } );
+
+            return button;
+        } );
+	}
+}
 
 class Editor extends ClassicEditor {
 	public static override builtinPlugins = [
@@ -61,7 +89,8 @@ class Editor extends ClassicEditor {
 		TextTransformation,
 		Highlight,
 		Underline,
-		Alignment
+		Alignment,
+		Timestamp
 	];
 
 	public static override defaultConfig = {
@@ -83,6 +112,7 @@ class Editor extends ClassicEditor {
 				'blockQuote',
 				'insertTable',
 				'mediaEmbed',
+				'timestamp',
 				'|',
 				'bulletedList',
 				'numberedList',
