@@ -32,6 +32,7 @@ import { Highlight } from '@ckeditor/ckeditor5-highlight';
 import { Alignment } from '@ckeditor/ckeditor5-alignment';
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
+import Abbreviation from '../plugins/abbreviation/abbreviation';
 
 // Timestamp plugin
 class Timestamp extends Plugin {
@@ -90,7 +91,8 @@ class Editor extends ClassicEditor {
 		Highlight,
 		Underline,
 		Alignment,
-		Timestamp
+		Timestamp,
+		Abbreviation
 	];
 
 	public static override defaultConfig = {
@@ -113,6 +115,7 @@ class Editor extends ClassicEditor {
 				'insertTable',
 				'mediaEmbed',
 				'timestamp',
+				'abbreviation',
 				'|',
 				'bulletedList',
 				'numberedList',
