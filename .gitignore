@@ -14,13 +14,14 @@ lib-cov
 pids
 logs
 results
-tmp
 
 # Build
 public/css/main.css
 
 # Dependencies (includes custom builds)
 node_modules/
+npm-debug.log
+yarn-error.log
 
 # Ignore built ts files
 dist/**/*
@@ -31,12 +32,9 @@ api.tar
 api/staticfiles
 .env
 .env.*
-api/salesbeat-cache.sqlite
 cypress.env.json
 .coverage
 coverage.xml
-celerybeat-schedule
-api/scripts/databases.md
 
 # VS solution file
 *.sln
@@ -49,12 +47,32 @@ Thumbs.db
 # Build
 public/css/main.css
 
-# CK editor build
+# Compiled output
 build/
+tmp/
+dist/
+out-tsc/
+bazel-out/
 
 # Coverage reports
 coverage
 
-# Editors
+# IDEs and Editors
 .idea
 *.iml
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Miscellaneous
+client/.angular/cache
+client/.sass-cache/
+client/connect.lock/
+client/coverage/
+client/libpeerconnection.log/
+client/testem.log
+client/typings/
+
