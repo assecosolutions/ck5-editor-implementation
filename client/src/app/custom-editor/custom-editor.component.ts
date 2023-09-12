@@ -1,6 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { CKEditorModule, ChangeEvent } from '@ckeditor/ckeditor5-angular';
 import Editor from '../../../ck-custom-build/build/ckeditor';
 
 @Component({
@@ -17,6 +17,12 @@ export class CustomEditorComponent {
 			uploadUrl: 'http://localhost:5278/upload',
       propertyName: 'file',
 		}
+  }
+
+  public onChange( { editor }: ChangeEvent ) {
+    const data = editor.data.get();
+
+    console.log( data.toString() );
   }
 }
 
