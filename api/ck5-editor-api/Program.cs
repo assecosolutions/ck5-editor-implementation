@@ -52,4 +52,20 @@ app.MapPost("/upload", async (HttpRequest req) =>
     return Results.Json(responseList);
 });
 
+app.MapPost("/send", async (HttpRequest req) =>
+{
+    using StreamReader reader = new(req.Body);
+    string htmlData = await reader.ReadToEndAsync();
+
+    if (!string.IsNullOrEmpty(htmlData))
+    {
+        return Results.Text(htmlData, "text/html");
+    }
+    else
+    {
+        return Results.BadRequest("HTML data cannot be empty.");
+    }
+});
+
+
 app.Run();

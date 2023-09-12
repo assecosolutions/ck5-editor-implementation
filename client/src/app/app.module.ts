@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomEditorModule } from './custom-editor/custom-editor.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { CustomEditorModule } from './custom-editor/custom-editor.component';
     BrowserModule,
     NgbModule,
     CustomEditorModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
