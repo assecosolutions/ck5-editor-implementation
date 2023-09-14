@@ -20,12 +20,6 @@ app.UseCors(policyName);
 
 app.UseHttpsRedirection();
 
-
-app.MapGet("/test", () =>
-{
-    return "hello";
-});
-
 app.MapPost("/upload", async (HttpRequest req) =>
 {
     IFormFileCollection files = req.Form.Files;
@@ -66,6 +60,5 @@ app.MapPost("/send", async (HttpRequest req) =>
         return Results.BadRequest("HTML data cannot be empty.");
     }
 });
-
 
 app.Run();
