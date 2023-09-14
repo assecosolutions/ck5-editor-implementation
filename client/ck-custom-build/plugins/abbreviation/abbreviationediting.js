@@ -1,10 +1,14 @@
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import { ViewElement } from '@ckeditor/ckeditor5-engine';
+import AbbreviationCommand from './abbreviationcommand';
 
 export default class AbbreviationEditing extends Plugin {
     init() {
         this._defineSchema();
         this._defineConverters();
+
+        this.editor.commands.add(
+            'addAbbreviation', new AbbreviationCommand( this.editor )
+        );
     }
 
     _defineSchema() {

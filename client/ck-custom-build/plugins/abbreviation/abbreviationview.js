@@ -3,13 +3,18 @@ import {
     LabeledFieldView,
     createLabeledInputText,
     ButtonView,
-    submitHandler
+    submitHandler,
+    FocusCycler	
 } from '@ckeditor/ckeditor5-ui';
 import { icons } from '@ckeditor/ckeditor5-core';
+import { FocusTracker, KeystrokeHandler } from '@ckeditor/ckeditor5-utils';
 
 export default class FormView extends View {
     constructor( locale ) {
         super( locale );
+
+        this.focusTracker = new FocusTracker();
+        this.keystrokes = new KeystrokeHandler();
 
         this.abbrInputView = this._createInput( 'Add abbreviation' );
         this.titleInputView = this._createInput( 'Add title' );
@@ -31,6 +36,19 @@ export default class FormView extends View {
             this.cancelButtonView
         ] );
 
+        this._focusCycler = new FocusCycler( {
+            focusables: this.childViews,
+            focusTracker: this.focusTracker,
+            keystrokeHandler: this.keystrokes,
+            actions: {
+                // Navigate form fields backwards using the Shift + Tab keystroke.
+                focusPrevious: 'shift + tab',
+
+                // Navigate form fields forwards using the Tab key.
+                focusNext: 'tab'
+            }
+        } );
+
         this.setTemplate( {
             tag: 'form',
             attributes: {
@@ -49,10 +67,32 @@ export default class FormView extends View {
         submitHandler( {
             view: this
         } );
+
+        this.childViews._items.forEach( view => {
+            // Register the view in the focus tracker.
+            this.focusTracker.add( view.element );
+        } );
+
+        // Start listening for the keystrokes coming from #element.
+        this.keystrokes.listenTo( this.element );
+    }
+
+    destroy() {
+        super.destroy();
+
+        this.focusTracker.destroy();
+        this.keystrokes.destroy();
     }
 
     focus() {
-        this.childViews.first.focus();
+        // If the abbreviation text field is enabled, focus it.
+        if ( this.abbrInputView.isEnabled ) {
+            this.abbrInputView.focus();
+        }
+        // Focus the abbreviation title field if the former is disabled.
+        else {
+            this.titleInputView.focus();
+        }
     }
 
     _createInput( label ) {
@@ -75,6 +115,4 @@ export default class FormView extends View {
 
         return button;
     }
-
-
 }
