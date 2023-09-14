@@ -3,7 +3,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, NgModule } from '@angular/core';
 import { CKEditorModule, ChangeEvent } from '@ckeditor/ckeditor5-angular';
 import Editor from '../../../ck-custom-build/build/ckeditor';
 import { EditorService } from '../services/editor.service';
-import { EditorContent } from '../app.models';
 
 @Component({
   selector: 'custom-editor',
@@ -12,8 +11,9 @@ import { EditorContent } from '../app.models';
 })
 export class CustomEditorComponent {
   public Editor = Editor;
-  public editor_output_object!: EditorContent;
   public editor_output = "";
+  public editor_output_result = "";
+  // Sets data to the editor at the beginning
   public editor_data = '<h2><strong>Hello,</strong></h2><p><u>I hope you are doing well.</u></p><p><strong>Kind regards,</strong></p><p><mark class="marker-pink">K.</mark></p>';
 
   constructor(
@@ -29,15 +29,15 @@ export class CustomEditorComponent {
 
   public onChange( { editor }: ChangeEvent ) {
     if (editor && editor.data) {
-      const data = editor.data.get();
-      this.editor_data = data;
+      this.editor_output = editor.data.get();
     } else {
-      this.editor_data = 'Undefined';
+      this.editor_output = 'Undefined';
     }
   }
 
   public onSend() {
-    this.editorService.sendEditorConent(this.editor_data).subscribe( { 
+    // Using the editor service
+    this.editorService.sendEditorConent(this.editor_output).subscribe( { 
       next: (data) => {
         this.setEditorOutput(data);
       },
@@ -49,11 +49,10 @@ export class CustomEditorComponent {
 
   public setEditorOutput( value: any ): void {
     if (typeof value === 'object' && value !== null && 'content' in value) {
-      this.editor_output_object = value;
+      this.editor_output_result = value.content;
     } else {
-      this.editor_output_object = { content: value};
+      this.editor_output_result = value;
     }
-    this.editor_output = value.content;
   }
 }
 
