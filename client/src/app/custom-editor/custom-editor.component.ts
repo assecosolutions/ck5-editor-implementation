@@ -11,10 +11,10 @@ import { EditorService } from '../services/editor.service';
 })
 export class CustomEditorComponent {
   public Editor = Editor;
-  public editor_output = "";
-  public editor_output_result = "";
   // Sets data to the editor at the beginning
   public editor_data = '<h2><strong>Hello,</strong></h2><p><u>I hope you are doing well.</u></p><p><strong>Kind regards,</strong></p><p><mark class="marker-pink">K.</mark></p>';
+  public editor_output = this.editor_data;
+  public editor_output_result = "";
 
   constructor(
     private editorService: EditorService
